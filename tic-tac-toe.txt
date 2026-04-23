@@ -19,3 +19,10 @@ handleClick when the button is clicked. Then I imported useState so that I could
 to keep track of the value what should be shown on the button. Inside the handleClick you should use setValue.
 Also, this means you need to remove the prop value from the Squares in Board. This will display the 3x3 grid that
 is blank and if you click a square it will fill with an X.
+6. Now we want to have Board handle the state of all of the squares. the first part is to remove almost everything
+from Square except a prop for value and a prop for click behavior, and then put the click behavior prop in the
+button onOnclick and the value in the button. Then you need to change board to have a useState with an array
+of nine null elements. Then create a handle click method with a parameter i so that you can change the state
+of any of the elements of the array. Then pass the correct value and handleClick method to each square using
+the right index, and make sure to use an arrow function to call handleClick(i). This displays the exact same
+thing as the last step.
