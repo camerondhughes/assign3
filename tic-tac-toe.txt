@@ -14,3 +14,8 @@ in the boxes to be the box index 1-9. So it looks like a 3x3 with 1-9 going sequ
 4. I changed all the previous buttons into Square components with a prop for value by putting {value} into
 the declaration for Square and the text inside the button. Also, you have to change the Squares on the
 board to declare value="something". This displays the same as the previous step.
+5. I added a function handleClick into Square and then inside the button that square returns had it run
+handleClick when the button is clicked. Then I imported useState so that I could use it with a value and setValue
+to keep track of the value what should be shown on the button. Inside the handleClick you should use setValue.
+Also, this means you need to remove the prop value from the Squares in Board. This will display the 3x3 grid that
+is blank and if you click a square it will fill with an X.
