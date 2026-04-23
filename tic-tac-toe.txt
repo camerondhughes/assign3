@@ -2,11 +2,15 @@ Steps I Took To Create Tic-Tac-Toe:
 1. Follow the required set-up in the assignment including cloning the given repository into WSL and then
 opening it in WSL through VSCode to be able to edit all the required files. I am skipping details here as based
 on the instructions I am only logging about making the tic-tac-toe, but regardless I want to give a quick overview
-of my setup.
+of my setup. Also, every few steps I am staging and committing with git.
 2. I deleted everything from the given App.jsx file except the imports as I thought I might need them and added
 a declaration for a function Square that returned a button with the text "X", which displayed on the page as a
 small box with an X in the top left.
 2. Then I duplicated the button in the return 9 times and had to add a wrapper to make sure that only one thing
 is returned. This displayed nine boxes with X's in them, but they were in a line along the top left.
 3. To make it three separate rows, I put three boxes each into three div classes with the class name board-row
-so it actually displayed as a baord like we wanted, and I renamed the function to Board.
+so it actually displayed as a board like we wanted, and I renamed the function to Board. Also, I changed the X
+in the boxes to be the box index 1-9. So it looks like a 3x3 with 1-9 going sequentially.
+4. I changed all the previous buttons into Square components with a prop for value by putting {value} into
+the declaration for Square and the text inside the button. Also, you have to change the Squares on the
+board to declare value="something". This displays the same as the previous step.
