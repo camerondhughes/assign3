@@ -63,3 +63,5 @@ the history from the begininning to current plus the new move and then set the h
 make Game show the currently selected move instead of the final move. This will display the same as before
 except the history button functionality actually works and shows the baord at that point. If you go back in
 in time a new move will override any of the "future" moves.
+13. As a final step, we change the X/O flip from a bool to depending on whether move is even or odd to not
+redundantly store both of them in state. The display will be the same as the last step.
