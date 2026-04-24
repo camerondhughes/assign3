@@ -54,4 +54,6 @@ handle play set history and the X/O flip. This will look the exact same as the l
 list item buttons that will call jump on click and display either go to move _ or go to game start if move
 is 0. This displays the list but the buttons don't work and we get an error as the list items don't have a
 key prop.
-11.
+11. Now we need to fix this problem with keys by setting the key with the move prop. This will display the
+same as before but now with no error.
+12.
