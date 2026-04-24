@@ -33,3 +33,12 @@ the value everytime the click is handled. We also then need to flip that bool at
 And finally, you need to check the value of a Square before handling click as if it already has a value, you
 don't want to change it, so return early if it has a value. This will display a 3x3 grid where clicking once
 will have an X, then an O, and so on, and you can't override the clicks.
+8. Now we want to be able to check if the game has been won, and if so, stop the game and show a screen
+the shows it. First we need to create a function to check if it has been won, you can do this by creating
+a 2D array of winning combination indexes and checking if all three of the values the squares array are the same
+and that they are not null, and if so, return X or O based on whats in the square. We can add this function into
+the click handling in Board as part of the early return with if squares isn't null as if the game is won we don't
+want more clicking. Also, we want to display a status of the next move, or if the game is won, show who won.
+To do that we add a const variable based on if the game is won and set the status based on if the game is won
+and if not, who is up next. Now we have the working 3x3 grid from before but with a status line above it that
+alternates between saying X and O, and if someone wins, it will display the correct winner.
