@@ -1,0 +1,36 @@
+Steps I Took To Transform Tic-Tac-Toe into Chorus Lapilli:
+1. To start converting tic-tac-toe into Chorus Lapilli, I added some constants and helper functions above the square component. 
+First, I added a constant for the center square set to 4 since that is its index. Then I added an adjacency object that maps each 
+square index to an array of its neighboring square indexes, since we need to know which squares are reachable from any given square. 
+For example, the corners only have three neighbors, the edges have five, and the center has all eight surrounding squares.
+2. I then added four small helper functions. The first counts how many squares a given player occupies by filtering the squares array. 
+The second uses that to check if a player already has three or more pieces on the board, since that is when they must move instead of 
+place. The third checks if a given player's piece is in the center square. The fourth simulates making a move on a copy of the squares 
+array and checks if it would result in a win. These helpers keep the click logic readable later on.
+3. Next I moved the selected index state up from the board component into the game component, initializing it to null. The reason for 
+putting it in game rather than board is that when you click a time travel button to jump to a past move, the jump function can also 
+clear the selection. Without this, a piece selected in the current move could stay highlighted even after jumping to a different board 
+state, which would be confusing and potentially cause bugs.
+4. I updated the jump function in game to also clear the selected index whenever you jump to a past move, so the selection always resets 
+cleanly on time travel.
+5. I passed the selected index and a way to update it down from game into board, and then from board into each square. I also added a 
+prop to square that adds a selected css class to the button when true, so the currently selected piece is visually highlighted. You 
+should add a style for the selected square in your css, something like a colored outline, so the player can see which piece they have 
+picked up.
+6. Now I rewrote the click handler inside board to handle both the placement phase and the movement phase. At the top it still returns 
+early if there is already a winner. Then it checks if the current player is in the movement phase. If the player has fewer than three 
+pieces, it works exactly like the original tic-tac-toe placement: it returns early if the square is already occupied and otherwise places 
+the piece and calls the play handler.
+7. For the movement phase I added a two-click flow. On the first click, if no piece is selected yet, it checks that the clicked square 
+belongs to the current player and if so saves that index as the selection. If the clicked square is not the current player's piece it does 
+nothing. On the second click, if a piece is already selected, it first checks if the player clicked the same square again and if so deselects 
+it. Then it checks if the destination is a valid move: the square must be empty and must be in the adjacency list for the selected piece. If 
+either check fails, it resets the selection without making any move, which satisfies the autograder requirement of reverting after two clicks 
+on an invalid move.
+8. I then added the center rule check inside the second click of the movement phase. After confirming the destination is adjacent and empty, 
+it checks if the current player has a piece in the center square. If they do, the move is only allowed if it either originates from the center 
+square, vacating it, or would result in a win using the win simulation helper. If neither condition is met, the selection resets and no move 
+is made.
+9. Finally I updated the status message in board to give clearer feedback during the movement phase. If a piece is selected it says to click 
+a destination, if no piece is selected but the player is in the movement phase it says to select a piece to move, and otherwise it shows the 
+normal next player or winner message as before. The rest of the game component and the time travel history list remained unchanged.

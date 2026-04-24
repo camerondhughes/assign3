@@ -155,6 +155,72 @@ class TestChorusLapilli(unittest.TestCase):
         tiles[0].click()
         self.assertTileIs(tiles[0], self.SYMBOL_X)
 
+    def test_alternating_turns(self):
+        '''Check that turns alternate between X and O.'''
+        tiles = self.driver.find_elements(By.XPATH, self.BOARD_TILE_XPATH)
+        tiles[0].click()
+        self.assertTileIs(tiles[0], self.SYMBOL_X)
+        tiles[1].click()
+        self.assertTileIs(tiles[1], self.SYMBOL_O)
+        tiles[2].click()
+        self.assertTileIs(tiles[2], self.SYMBOL_X)
+
+    def test_cannot_click_occupied_tile(self):
+        '''Check that clicking an occupied tile does not overwrite it.'''
+        tiles = self.driver.find_elements(By.XPATH, self.BOARD_TILE_XPATH)
+        tiles[0].click()
+        tiles[0].click()
+        self.assertTileIs(tiles[0], self.SYMBOL_X)
+        self.assertTileIs(tiles[1], self.SYMBOL_BLANK)
+
+    def test_no_moves_after_win(self):
+        '''Check that no further moves are allowed after a player wins.'''
+        tiles = self.driver.find_elements(By.XPATH, self.BOARD_TILE_XPATH)
+        tiles[0].click()
+        tiles[3].click()
+        tiles[1].click()
+        tiles[4].click()
+        tiles[2].click()
+        tiles[5].click()
+        self.assertTileIs(tiles[5], self.SYMBOL_BLANK)
+
+    def test_movement_phase_after_three_pieces(self):
+        '''Check that after each player places 3 pieces, a piece moves
+        instead of a new one being added (total X pieces stays at 3).'''
+        tiles = self.driver.find_elements(By.XPATH, self.BOARD_TILE_XPATH)
+        tiles[0].click()
+        tiles[1].click()
+        tiles[2].click()
+        tiles[3].click()
+        tiles[6].click()
+        tiles[5].click()
+        tiles[6].click()
+        tiles[7].click()
+        self.assertTileIs(tiles[6], self.SYMBOL_BLANK)
+        self.assertTileIs(tiles[7], self.SYMBOL_X)
+        x_count = sum(
+            1 for t in tiles if t.text.strip() in self.SYMBOL_X
+        )
+        self.assertEqual(x_count, 3)
+
+    def test_center_rule_forces_move_or_vacate(self):
+        '''Check that a player with a piece in the center must either win
+        or vacate the center on their turn.'''
+        tiles = self.driver.find_elements(By.XPATH, self.BOARD_TILE_XPATH)
+        tiles[0].click()
+        tiles[1].click()
+        tiles[2].click()
+        tiles[3].click()
+        tiles[4].click()
+        tiles[5].click()
+        tiles[0].click()
+        tiles[8].click()
+        self.assertTileIs(tiles[8], self.SYMBOL_BLANK)
+        tiles[4].click()
+        tiles[7].click()
+        self.assertTileIs(tiles[4], self.SYMBOL_BLANK)
+        self.assertTileIs(tiles[7], self.SYMBOL_X)
+
 
 # ================= [DO NOT MAKE ANY CHANGES BELOW THIS LINE] =================
 
