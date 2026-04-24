@@ -42,3 +42,12 @@ want more clicking. Also, we want to display a status of the next move, or if th
 To do that we add a const variable based on if the game is won and set the status based on if the game is won
 and if not, who is up next. Now we have the working 3x3 grid from before but with a status line above it that
 alternates between saying X and O, and if someone wins, it will display the correct winner.
+9. Now we want to add a game component and take the state features from board and put them into game. We first
+add the given Game code that uses divs so have a board and an empty ordered list of game info, and make game
+the default function. Then add the same X/O flip from board but then add a history as an array of nine element
+arrays that are all null. Also add a current square that is the last element of history. Create a handle play
+function and pass the X/O flip state, the current squares, and the handle play into board as props. You will
+need to edit board to take those three props. With those props you just need to use the prop for handle play
+instead of the two lines setting squares and the X/O flip in board's handle click. Finally, you need to make
+handle play set history and the X/O flip. This will look the exact same as the last step.
+10.
