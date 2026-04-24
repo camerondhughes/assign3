@@ -56,4 +56,10 @@ is 0. This displays the list but the buttons don't work and we get an error as t
 key prop.
 11. Now we need to fix this problem with keys by setting the key with the move prop. This will display the
 same as before but now with no error.
-12.
+12. Now we want to get jump to work. First make Game have a save state for the current move defaulted to 0
+and in the jump function give it a parameter next move and jump to that move and change the X/O flip to be
+based on whether next move is even or odd. Also, update handle play so that there is a next history which is
+the history from the begininning to current plus the new move and then set the history and current move. Also,
+make Game show the currently selected move instead of the final move. This will display the same as before
+except the history button functionality actually works and shows the baord at that point. If you go back in
+in time a new move will override any of the "future" moves.
