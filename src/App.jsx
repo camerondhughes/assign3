@@ -34,7 +34,7 @@ function wouldWin(squares, from, to, player) {
 
 function Square({ value, onSquareClick, isSelected }) {
   return (
-    <button className={"square${isSelected ? ' selected' : ''}"} onClick={onSquareClick}>
+    <button className={"square" + (isSelected ? ' selected' : '')} onClick={onSquareClick}>
       {value}
     </button>
   );
@@ -92,9 +92,9 @@ function Board({ xIsNext, squares, onPlay, selectedIndex, onSelect }) {
   if (winner) {
     status = 'Winner: ' + winner;
   } else if (inMovementPhase && selectedIndex !== null) {
-    status = "${player}: move selected piece (click destination)";
+    status = player + ": move selected piece (click destination)";;
   } else if (inMovementPhase) {
-    status = "${player}: select a piece to move";
+    status = player + ": select a piece to move";
   } else {
     status = 'Next player: ' + player;
   }
@@ -141,7 +141,7 @@ export default function Game() {
   }
 
   const moves = history.map((squares, move) => {
-    const description = move > 0 ? "Go to move #${move}" : 'Go to game start';
+    const description = move > 0 ? 'Go to move ' + move : 'Go to game start';
     return (
       <li key={move}>
         <button onClick={() => jumpTo(move)}>{description}</button>
