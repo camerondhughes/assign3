@@ -2,7 +2,9 @@ Steps I Took To Create Tic-Tac-Toe:
 1. Follow the required set-up in the assignment including cloning the given repository into WSL and then
 opening it in WSL through VSCode to be able to edit all the required files. I am skipping details here as based
 on the instructions I am only logging about making the tic-tac-toe, but regardless I want to give a quick overview
-of my setup. Also, every few steps I am staging and committing with git.
+of my setup. Also, every few steps I am staging and committing with git. Also, I sort of switched from I to you
+halfway through because it kind of felt weird saying I when it is instructional, anyways it would be too much
+work to change.
 2. I deleted everything from the given App.jsx file except the imports as I thought I might need them and added
 a declaration for a function Square that returned a button with the text "X", which displayed on the page as a
 small box with an X in the top left.
@@ -19,10 +21,15 @@ handleClick when the button is clicked. Then I imported useState so that I could
 to keep track of the value what should be shown on the button. Inside the handleClick you should use setValue.
 Also, this means you need to remove the prop value from the Squares in Board. This will display the 3x3 grid that
 is blank and if you click a square it will fill with an X.
-6. Now we want to have Board handle the state of all of the squares. the first part is to remove almost everything
+6. Now we want to have Board handle the state of all of the squares. The first part is to remove almost everything
 from Square except a prop for value and a prop for click behavior, and then put the click behavior prop in the
 button onOnclick and the value in the button. Then you need to change board to have a useState with an array
 of nine null elements. Then create a handle click method with a parameter i so that you can change the state
 of any of the elements of the array. Then pass the correct value and handleClick method to each square using
 the right index, and make sure to use an arrow function to call handleClick(i). This displays the exact same
 thing as the last step.
+7. In order to alternate between X and O for the game, we need to add a useState for a bool into board and check
+the value everytime the click is handled. We also then need to flip that bool at the end of every click call.
+And finally, you need to check the value of a Square before handling click as if it already has a value, you
+don't want to change it, so return early if it has a value. This will display a 3x3 grid where clicking once
+will have an X, then an O, and so on, and you can't override the clicks.
